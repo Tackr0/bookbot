@@ -1,6 +1,5 @@
 def main():
     
-
     path = "frankenstein.txt"
     book_contents = get_book_contents(path)
 
@@ -26,10 +25,11 @@ def count_character_appearances(book_contents):
     modified_contents = book_contents.lower()
 
     for char in modified_contents:
-        if char in char_dict:
-            char_dict[char] += 1
-        else:
-            char_dict[char] = 1 
+
+        #Filter non-alphabetical characters
+        if char.isalpha() == False: continue
+        elif char in char_dict: char_dict[char] += 1
+        else: char_dict[char] = 1 
     
     return char_dict
 
@@ -41,7 +41,6 @@ def print_report(path, word_count, character_appearances):
     sorted_dictionary = dict(sorted(character_appearances.items(), key=lambda x:x[1], reverse=True))
 
     for char in sorted_dictionary:
-        if char.isalpha() == False: continue
         print(f"The '{char}' character was found {sorted_dictionary[char]} times")
 
     print("--- End report ---")
